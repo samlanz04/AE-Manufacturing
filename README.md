@@ -10,7 +10,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 npm install 
 
-go to index.php run  php -S localhost:8000
+go to index.php run  "php -S localhost:8000"
+
+
 <!-- Database Configuration
 ```
 - Download zip file and Unzip file on your local server.
