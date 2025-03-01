@@ -5,6 +5,9 @@ body {
     padding: 0;
     background-color: #F4F4F4;
 }
+h4{
+    padding-left: 6%;
+}
 
 /* Header Styles */
 .header {
@@ -28,7 +31,7 @@ body {
 .logo {
     max-height: 70px; /* Larger logo without expanding header */
     width: auto;
-    margin-right: 40px; /* Manual spacing between logo and nav links */
+   /* Manual spacing between logo and nav links */
 }
 
 /* Navigation Links */
@@ -95,15 +98,53 @@ body {
     color: #555;
 }
 
+/* Hamburger Button */
+.hamburger-btn {
+    display: none; /* Hide by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 20px;
+}
+  
+.hamburger-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #1A1884;
+    position: relative;
+}
+  
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    width: 25px;
+    height: 3px;
+    background-color: #1A1884;
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+  
+.hamburger-icon::before {
+    top: -8px;
+}
+  
+.hamburger-icon::after {
+    top: 8px;
+}
+
+/* Search Bar */
 .search-bar {
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
-    padding: 7px 29px;
+    padding: 7px;
     border-top: 5px solid #ccc;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 5px;
+    /* margin-top: 5px; */
     border: 3px solid #1A1884;
     width: 600px; /* Fixed width instead of full width */
     margin-left: auto;
@@ -158,82 +199,9 @@ body {
     color: black;
 }
 
-/* image */
-.image-container {
-    position: relative;
-    width: 90%;
-    height: 300px;
-}
-
-.image-container img {
-    width: 110%;
-    height: 100%;
-    object-fit: fill;
-}
-
-.next-btn {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-/* Ads Container */
-.ads-container {
-    background-color: #ffffff; /* Light gray background */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    gap: 20px; /* Space between ads */
-    padding: 20px;
-    /* border-radius: 10px; */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Subtle shadow */
-    /* margin-bottom: 20px; */
-}
-
-/* Individual Ad Item */
-.ad-item {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 8px;
-    padding: 15px;
-    width: 100%;
-    max-width: 300px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
-}
-
-.ad-item:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-}
-
-/* Ad Images */
-.ads-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px; /* Rounded corners for images */
-}
-
-/* Caption */
-.caption {
-    color: #1a237e; /* Navy blue color */
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 10px;
-    text-transform: uppercase; /* Uppercase text for emphasis */
-}
 /* Container to hold sidebar and main content */
 .container {
     display: flex;
-    /* height: 100vh; */
-    /* width: 100%; */
-    /* min-width: 100%; */
     margin: 0;
     padding: 0;
 }
@@ -292,30 +260,57 @@ body {
 /* Main content styling */
 .main-content {
     flex: 1;
-    /* padding: 20px; */
     background-color: #fff;
 }
 
+/* Image container */
+.image-container {
+    position: relative;
+    width: 90%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.next-btn {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Services Section */
 .services {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    
+    padding: 20px;
 }
-h2{
+
+h2 {
     color: #1a237e;
 }
 
 .service-item {
     flex: 1 1 calc(25% - 20px);
     background-color: #f9f9f9;
-    /* padding: 20px; */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    overflow: hidden;
 }
 
-.service-item img{
+.service-item img {
     width: 100%;
     height: 50%;
     object-fit: cover;
@@ -324,6 +319,7 @@ h2{
 .service-item h2 {
     margin-bottom: 15px;
     font-size: 20px;
+    padding: 0 10px;
 }
 
 .service-item button {
@@ -334,26 +330,57 @@ h2{
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 15px;
 }
 
 .service-item button:hover {
     background-color: #0056b3;
 }
 
+/* Ads Container */
+.ads-container {
+    background-color: #ffffff; /* Light gray background */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    gap: 20px; /* Space between ads */
+    padding: 20px;
+}
 
+/* Individual Ad Item */
+.ad-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
 
+.ad-item:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
 
+/* Ad Images */
+.ads-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Rounded corners for images */
+}
 
+/* Caption */
+.caption {
+    color: #1a237e; /* Navy blue color */
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase; /* Uppercase text for emphasis */
+}
 
-
-
-
-
-
-
-
-
-
+/* Sponsors section */
 .sponsors-section {
     padding: 40px 0;
     background-color: #ffffff;
@@ -445,63 +472,13 @@ h2{
     background-color: #0066cc;
 }
 
-@media (max-width: 992px) {
-    .sponsor-item {
-        flex: 0 0 33.33%;
-    }
-}
-
-@media (max-width: 768px) {
-    .sponsor-item {
-        flex: 0 0 50%;
-    }
-}
-
-@media (max-width: 576px) {
-    .sponsor-item {
-        flex: 0 0 100%;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Footer Styles */
 .page-footer {
     background-color: #f5f5f5;
     padding: 10px 0; /* Reduced padding to make the footer shorter */
     border-top: 1px solid #ccc;
     font-family: Arial, sans-serif;
-    width: 90%;
+    width: 100vw;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -519,7 +496,7 @@ h2{
 .footer-nav {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    /* width: 100vw; */
     gap: 20px;
 }
 
@@ -610,24 +587,151 @@ h2{
 
 .copyright, .developer, .designby {
     margin: 3px 0; /* Reduced margin */
-    /* padding-left: 12%; */
 }
 
-/* Responsive Fix for Smaller Screens */
+/* Mobile and smaller screens responsiveness */
 @media (max-width: 768px) {
-    .footer-container {
+    /* Header responsive styles */
+    .hamburger-btn {
+        display: block; /* Show hamburger button on mobile */
+    }
+  
+    .nav-links, .user-actions {
+        display: none; /* Hide nav links and user actions on mobile */
+    }
+
+    /* Sidebar responsive styles */
+    .sidebar {
+        display: none;
+    }
+  
+    .sidebar.active {
+        left: 0; /* Show sidebar when active */
+    }
+  
+    .main-content {
+        margin-left: 0; /* Reset margin for mobile */
+    }
+
+    /* Search bar responsive styles */
+    .search-bar {
+        
+        /* border-top: 5px solid #ccc; */
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        /* margin-top: 5px; */
+        border: 3px solid #1A1884;
+        width: 85%;
+            
+            
+        
+        /* width: 85%;
+        height: 40%; */
+        /* padding: 10px; */
+    }
+    .dropbtn {
+        padding: 0%;
+    }
+  
+    .search-bar input {
+        width: 100%;
+    }
+
+    /* Services responsive styles */
+    .services {
         flex-direction: column;
-        align-items: center;
+    }
+  
+    .service-item {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Sponsor item responsive styles */
+    .sponsor-item {
+        flex: 0 0 50%;
+    }
+
+    
+}
+
+/* Additional breakpoint for very small screens */
+@media (max-width: 576px) {
+    .sponsor-item {
+        flex: 0 0 100%;
+    }
+    .sidebar {
+        display: none;
+    }
+    .ads-container{
+        display: none;
+    }
+
+    .search-bar{
+        margin-left: 6px;
+        /* margin-right: 12px; */
+    }
+    .logo{
+        margin-left: 20%;
+    }
+
+}
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .ads-container{
+        display: none;
+    }
+    .footer-nav .container {
+        flex-direction: column;
+        margin-right: 38%;
+        width: 100vw;
+    }
+    .image-container img {
+        width: 100%;
+        /* height: 100%; */
+        object-fit: contain;
+    }
+    .image-container{
+        /* width: 100%; */
+        height: 10%;
+        object-fit: contain;
+    }
+    .footer-nav__col {
+        /* margin-right: 10px;
+        margin-bottom: 30px; */
+        
+        margin-left: 42%;
+    }
+    
+    .banners .container {
+        flex-direction: column;
+    }
+    
+    .banner {
+        margin-bottom: 20px;
+    }
+    
+    .page-footer__subline .container {
+        flex-direction: column;
         text-align: center;
     }
-
-    .footer-nav {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-nav__col {
-        min-width: auto;
-        max-width: 100%;
+    
+    .copyright, .developer {
+        margin-bottom: 5px;
     }
 }
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .footer-nav {
+        /* padding: 20px 0; */
+        
+    }
+    
+    .footer-nav__heading {
+        font-size: 14px;
+    }
+    
+    .banner img {
+        max-height: 80px;
+    }
+}   
