@@ -9,145 +9,243 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles/style.css">
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Sponsor data
-            const sponsors = [
-                { name: "Sponsor 1", image: "images/Volvo.png" },
-                { name: "Sponsor 2", image: "images/MAN.png" },
-                { name: "Sponsor 3", image: "images/isuzu.png" },
-                { name: "Sponsor 4", image: "images/Hino.png" },
-                { name: "Sponsor 5", image: "images/Heil.png" },
-                { name: "Sponsor 6", image: "images/Fuso.png" },
-                { name: "Sponsor 7", image: "images/mercedes.png" }
+        document.addEventListener('DOMContentLoaded', function() {
+    // Sponsor data - images are loaded from the assets folder
+    const sponsors = [
+        { name: "Sponsor 1", image: "images/Volvo.png" },
+        { name: "Sponsor 2", image: "images/MAN.png" },
+        { name: "Sponsor 3", image: "images/isuzu.png" },
+        { name: "Sponsor 4", image: "images/Hino.png" },
+        { name: "Sponsor 5", image: "images/Heil.png" },
+        { name: "Sponsor 6", image: "images/Fuso.png" },
+        { name: "Sponsor 7", image: "images/mercedes.png" }
+        // { name: "Sponsor 8", image: "assets/sponsor8.png" }
+    ];
+
+    // DOM elements
+    const container = document.getElementById('sponsorsContainer');
+    const indicatorsContainer = document.getElementById('indicators');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const carousel = document.querySelector('.sponsors-carousel');
+
+    // Configuration
+    let currentIndex = 0;
+    let itemsPerView = getItemsPerView();
+    let totalSlides = Math.ceil(sponsors.length / itemsPerView);
+    let autoplayInterval;
+
+    // Initialize carousel
+    function initCarousel() {
+        // Add sponsor items
+        sponsors.forEach((sponsor, index) => {
+            const sponsorItem = document.createElement('div');
+            sponsorItem.className = 'sponsor-item';
+            sponsorItem.innerHTML = `
+                <img src="${sponsor.image}" alt="${sponsor.name}" class="sponsor-image">
+            `;
+            container.appendChild(sponsorItem);
+        });
+
+        // Create indicators
+        updateIndicators();
+
+        // Set initial position
+        updateCarousel();
+
+        // Start autoplay
+        startAutoplay();
+    }
+
+    // Get items per view based on screen size
+    function getItemsPerView() {
+        if (window.innerWidth < 576) return 1;
+        if (window.innerWidth < 768) return 2;
+        if (window.innerWidth < 992) return 3;
+        return 4;
+    }
+
+    // Update indicators based on current view
+    function updateIndicators() {
+        indicatorsContainer.innerHTML = '';
+        itemsPerView = getItemsPerView();
+        totalSlides = Math.ceil(sponsors.length / itemsPerView);
+
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = `indicator ${i === currentIndex ? 'active' : ''}`;
+            indicator.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarousel();
+                resetAutoplay();
+            });
+            indicatorsContainer.appendChild(indicator);
+        }
+    }
+
+    // Update carousel position and indicators
+    function updateCarousel() {
+        // Update slide position
+        const translateValue = -currentIndex * (100 / itemsPerView) * itemsPerView;
+        container.style.transform = `translateX(${translateValue}%)`;
+
+        // Update indicators
+        const indicators = document.querySelectorAll('.indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    // Go to previous slide
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+        resetAutoplay();
+    }
+
+    // Go to next slide
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+        resetAutoplay();
+    }
+
+    // Start autoplay
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 3000); // 3-second interval
+    }
+
+    // Reset autoplay timer
+    function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        startAutoplay();
+    }
+
+    // Pause autoplay on hover
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoplayInterval);
+    });
+
+    // Resume autoplay on mouse leave
+    carousel.addEventListener('mouseleave', () => {
+        startAutoplay();
+    });
+
+    // Event listeners
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
+    window.addEventListener('resize', () => {
+        const newItemsPerView = getItemsPerView();
+        if (newItemsPerView !== itemsPerView) {
+            // If view size changed, adjust current index and update
+            const currentPosition = currentIndex * itemsPerView;
+            itemsPerView = newItemsPerView;
+            currentIndex = Math.floor(currentPosition / itemsPerView);
+            updateIndicators();
+            updateCarousel();
+        }
+    });
+
+    // Initialize the carousel
+    initCarousel();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const hero = document.querySelector('.hero');
+            const images = [
+                'https://aem-images.s3.eu-central-1.amazonaws.com/Products/1.0.jpg',
+                'https://aem-images.s3.eu-central-1.amazonaws.com/Products/2.1.jpg'
             ];
+            let currentImageIndex = 0;
 
-            // DOM elements
-            const container = document.getElementById('sponsorsContainer');
-            const indicatorsContainer = document.getElementById('indicators');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const carousel = document.querySelector('.sponsors-carousel');
-
-            // Configuration
-            let currentIndex = 0;
-            let itemsPerView = getItemsPerView();
-            let totalSlides = Math.ceil(sponsors.length / itemsPerView);
-            let autoplayInterval;
-
-            // Initialize carousel
-            function initCarousel() {
-                sponsors.forEach((sponsor, index) => {
-                    const sponsorItem = document.createElement('div');
-                    sponsorItem.className = 'sponsor-item';
-                    sponsorItem.innerHTML = `<img src="${sponsor.image}" alt="${sponsor.name}" class="sponsor-image">`;
-                    container.appendChild(sponsorItem);
-                });
-
-                updateIndicators();
-                updateCarousel();
-                startAutoplay();
+            function changeBackground() {
+                const imageUrl = images[currentImageIndex];
+                hero.style.backgroundImage = `url(${imageUrl})`;
+                console.log(`Background image set to: ${imageUrl}`); // Debugging line
+                currentImageIndex = (currentImageIndex + 1) % images.length;
             }
 
-            // Get items per view based on screen size
-            function getItemsPerView() {
-                if (window.innerWidth < 576) return 1;
-                if (window.innerWidth < 768) return 2;
-                if (window.innerWidth < 992) return 3;
-                return 4;
+            function previousImage() {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                changeBackground();
             }
 
-            // Update indicators
-            function updateIndicators() {
-                indicatorsContainer.innerHTML = '';
-                itemsPerView = getItemsPerView();
-                totalSlides = Math.ceil(sponsors.length / itemsPerView);
-
-                for (let i = 0; i < totalSlides; i++) {
-                    const indicator = document.createElement('div');
-                    indicator.className = `indicator ${i === currentIndex ? 'active' : ''}`;
-                    indicator.addEventListener('click', () => {
-                        currentIndex = i;
-                        updateCarousel();
-                        resetAutoplay();
-                    });
-                    indicatorsContainer.appendChild(indicator);
-                }
+            function nextImage() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                changeBackground();
             }
 
-            // Update carousel position
-            function updateCarousel() {
-                const translateValue = -currentIndex * (100 / itemsPerView) * itemsPerView;
-                container.style.transform = `translateX(${translateValue}%)`;
+            setInterval(changeBackground, 5000); // Change every 5 seconds
+            changeBackground(); // Set the initial background image
 
-                const indicators = document.querySelectorAll('.indicator');
-                indicators.forEach((indicator, index) => {
-                    indicator.classList.toggle('active', index === currentIndex);
-                });
-            }
-
-            // Go to previous slide
-            function prevSlide() {
-                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-                resetAutoplay();
-            }
-
-            // Go to next slide
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                updateCarousel();
-                resetAutoplay();
-            }
-
-            // Start autoplay
-            function startAutoplay() {
-                autoplayInterval = setInterval(nextSlide, 3000);
-            }
-
-            // Reset autoplay timer
-            function resetAutoplay() {
-                clearInterval(autoplayInterval);
-                startAutoplay();
-            }
-
-            // Pause autoplay on hover
-            carousel.addEventListener('mouseenter', () => {
-                clearInterval(autoplayInterval);
-            });
-
-            // Resume autoplay on mouse leave
-            carousel.addEventListener('mouseleave', () => {
-                startAutoplay();
-            });
-
-            // Event listeners
-            prevBtn.addEventListener('click', prevSlide);
-            nextBtn.addEventListener('click', nextSlide);
-
-            window.addEventListener('resize', () => {
-                const newItemsPerView = getItemsPerView();
-                if (newItemsPerView !== itemsPerView) {
-                    const currentPosition = currentIndex * itemsPerView;
-                    itemsPerView = newItemsPerView;
-                    currentIndex = Math.floor(currentPosition / itemsPerView);
-                    updateIndicators();
-                    updateCarousel();
-                }
-            });
-
-            // Initialize the carousel
-            initCarousel();
+            // Attach event listeners to buttons
+            document.querySelector('.slider-btn.left').addEventListener('click', previousImage);
+            document.querySelector('.slider-btn.right').addEventListener('click', nextImage);
         });
+
+        function slide(sliderId, direction) {
+            const slider = document.getElementById(sliderId);
+            const scrollAmount = slider.offsetWidth * direction;
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.querySelector('.navbar-toggle');
+        const navbarNav = document.querySelector('.navbar-nav');
+
+        toggleButton.addEventListener('click', function () {
+            navbarNav.classList.toggle('active');
+            toggleButton.classList.toggle('active');
+            });
+        });
+
+        const images = ["images/2.jpg", "images/1.jpg", "images/banner.jpg"];
+        let currentIndex = 0;
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            document.getElementById("image").src = images[currentIndex];
+        }
 
         document.addEventListener('DOMContentLoaded', function () {
-            const toggleButton = document.querySelector('.navbar-toggle');
-            const navbarNav = document.querySelector('.navbar-nav');
+    // Initialize cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let total = 0;
 
-            toggleButton.addEventListener('click', function () {
-                navbarNav.classList.toggle('active');
-                toggleButton.classList.toggle('active');
-            });
+    // Function to update the cart total
+    function updateCartTotal() {
+        total = cart.reduce((sum, item) => sum + item.price, 0);
+        console.log(`Cart Total: $${total.toLocaleString()}`);
+        // You can display the total on the page if needed
+    }
+
+    // Function to add an item to the cart
+    function addToCart(productName, price) {
+        const existingItem = cart.find(item => item.name === productName);
+        if (existingItem) {
+            alert(`${productName} is already in your cart.`);
+        } else {
+            cart.push({ name: productName, price: price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`Added to cart: ${productName} - $${price.toLocaleString()}`);
+            updateCartTotal();
+        }
+    }
+
+    // Add event listeners to "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function () {
+            const productName = button.closest('.card').querySelector('h3').textContent;
+            const price = parseFloat(button.getAttribute('data-price'));
+            addToCart(productName, price);
         });
+    });
+
+    // Initialize cart total on page load
+    updateCartTotal();
+    });
         
     </script>
 </head>

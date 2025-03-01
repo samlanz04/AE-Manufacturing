@@ -331,6 +331,17 @@
     // Initialize cart total on page load
     updateCartTotal();
     });
+
+
+
+    
+    function viewDetails(name, image, description, price) {
+        // Construct the URL with query parameters
+        const url = `detail.php?name=${encodeURIComponent(name)}&image=${encodeURIComponent(image)}&description=${encodeURIComponent(description)}&price=${encodeURIComponent(price)}`;
+        // Redirect to the details page
+        window.location.href = url;
+    }
+    
     </script>
 </head>
 <body>
@@ -426,7 +437,8 @@
                 </div>
                 
                 <button class="add-to-cart" data-price="2000">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 1', 'images/Products/1.png', 'Description: A robust heavy-duty truck designed for demanding mining and construction sites. Equipped with a powerful engine, advanced suspension, and a spacious cabin for operator comfort. Perfect for hauling large loads over rough terrain.', '?')">View Details</button>
+
             </div>
             <div class="card" data-category="medium-duty">
                 
@@ -441,7 +453,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 2', 'images/Products/4.png', 'Description: A versatile medium-duty truck ideal for urban delivery and regional transportation. Features a fuel-efficient engine, ergonomic design, and excellent maneuverability for city driving.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="light-duty">
                 
@@ -456,7 +470,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 3', 'images/Products/6.png', 'Description : A reliable light-duty truck suitable for small businesses and local deliveries. Compact, easy to maintain, and designed for efficiency in tight spaces.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="light-duty">
                 
@@ -471,7 +487,8 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 4', 'images/Products/7.png', 'Description: A reliable light-duty truck suitable for small businesses and local deliveries. Compact, easy to maintain, and designed for efficiency in tight spaces.', '?')">View Details</button>
+
             </div>
             <div class="card" data-category="medium-duty">
                 
@@ -486,7 +503,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 5', 'images/Products/8.png', 'Description: A versatile medium-duty truck ideal for urban delivery and regional transportation. Features a fuel-efficient engine, ergonomic design, and excellent maneuverability for city driving.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="heavy-duty">
                 
@@ -502,7 +521,9 @@
                 </div>
                 <!-- data-price="150000" -->
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 6', 'images/Products/9.png', 'Description: A robust heavy-duty truck designed for demanding mining and construction sites. Equipped with a powerful engine, advanced suspension, and a spacious cabin for operator comfort. Perfect for hauling large loads over rough terrain.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="light-duty">
                 
@@ -517,7 +538,8 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 7', 'images/Products/10.png', 'Description: A reliable light-duty truck suitable for small businesses and local deliveries. Compact, easy to maintain, and designed for efficiency in tight spaces.', '?')">View Details</button>
+
             </div>
             <div class="card" data-category="medium-duty">
                 
@@ -532,7 +554,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 8', 'images/Products/11.png', 'Description: A versatile medium-duty truck ideal for urban delivery and regional transportation. Features a fuel-efficient engine, ergonomic design, and excellent maneuverability for city driving.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="light-duty">
                 
@@ -547,7 +571,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 9', 'images/Products/17.png', 'Description: A reliable light-duty truck suitable for small businesses and local deliveries. Compact, easy to maintain, and designed for efficiency in tight spaces.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="heavy-duty">
                 
@@ -562,7 +588,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 10', 'images/Products/19.png', 'Description: A robust heavy-duty truck designed for demanding mining and construction sites. Equipped with a powerful engine, advanced suspension, and a spacious cabin for operator comfort. Perfect for hauling large loads over rough terrain.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="medium-duty">
                 
@@ -577,7 +605,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Truck Model 11', 'images/Products/20.png', 'Description: A versatile medium-duty truck ideal for urban delivery and regional transportation. Features a fuel-efficient engine, ergonomic design, and excellent maneuverability for city driving.', '2000')">View Details</button>
+
+
             </div>
             <br>
             
@@ -594,7 +624,9 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Part Model 1', 'images/E.png', 'Description: A high-performance spare part designed for heavy-duty trucks. Built to withstand extreme conditions, ensuring durability and reliability for mining and construction applications.', '?')">View Details</button>
+
+
             </div>
             <div class="card" data-category="medium-duty">
                 
@@ -609,7 +641,8 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Part Model 2', 'images/B.png', 'Description: A durable spare part for medium-duty trucks. Engineered for longevity and optimal performance, making it ideal for urban delivery and regional transportation.', '?')">View Details</button>
+
             </div>
             <div class="card" data-category="light-duty">
                 
@@ -624,11 +657,11 @@
                     
                 </div>
                 <button class="add-to-cart" data-price="">Add to Cart</button>
-                <button class="view-details">View Details</button>
+                <button class="view-details" onclick="viewDetails('Part Model 3', 'images/A.png', 'Description: A cost-effective spare part for light-duty trucks. Perfect for small businesses and local deliveries, offering reliability and ease of installation.', '?')">View Details</button>
             </div>
             <!-- Add more cards with appropriate data-category attributes -->
         </div>
-        <footer class="page-footer">
+        <!-- <footer class="page-footer">
             <div class="footer-nav">
                 <div class="container">
                     <div class="footer-nav__col footer-nav__col--info">
@@ -695,7 +728,7 @@
                     <div class="designby">Design by Clowdy</div>
                 </div>
             </div>
-        </footer>
+        </footer> -->
     </main>
 
     <script src="scripts/script.js"></script>
